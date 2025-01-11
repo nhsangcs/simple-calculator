@@ -51,6 +51,22 @@ function handleOperator(nextOperator) {
     calculator.operator = nextOperator;
 }
 
+function calculateSquare() {
+    calculator.displayValue = String(Math.pow(parseFloat(calculator.displayValue), 2));
+}
+
+function calculateSin() {
+    calculator.displayValue = String(Math.sin(parseFloat(calculator.displayValue)));
+}
+
+function calculateCos() {
+    calculator.displayValue = String(Math.cos(parseFloat(calculator.displayValue)));
+}
+
+function calculateTan() {
+    calculator.displayValue = String(Math.tan(parseFloat(calculator.displayValue)));
+}
+
 function roundResult(result) {
     return Math.round(result * 10000000000) / 10000000000;
 }
@@ -109,6 +125,25 @@ keys.addEventListener('click', (event) => {
 
     if (target.classList.contains('backspace')) {
         backspace();
+        updateDisplay();
+        return;
+    }
+
+    if (target.classList.contains('function')) {
+        switch (target.value) {
+            case 'square':
+                calculateSquare();
+                break;
+            case 'sin':
+                calculateSin();
+                break;
+            case 'cos':
+                calculateCos();
+                break;
+            case 'tan':
+                calculateTan();
+                break;
+        }
         updateDisplay();
         return;
     }
