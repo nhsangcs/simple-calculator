@@ -55,6 +55,11 @@ function roundResult(result) {
     return Math.round(result * 10000000000) / 10000000000;
 }
 
+function backspace() {
+    const { displayValue } = calculator;
+    calculator.displayValue = displayValue.slice(0, -1) || '0';
+}
+
 const performCalculation = {
     '/': (firstOperand, secondOperand) => roundResult(firstOperand / secondOperand),
     '*': (firstOperand, secondOperand) => roundResult(firstOperand * secondOperand),
@@ -102,6 +107,12 @@ keys.addEventListener('click', (event) => {
         return;
     }
 
+    if (target.classList.contains('backspace')) {
+        backspace();
+        updateDisplay();
+        return;
+    }
+
     inputDigit(target.value);
     updateDisplay();
 });
@@ -124,7 +135,7 @@ document.addEventListener('keydown', (event) => {
         handleOperator('=');
         updateDisplay();
     } else if (key === 'Backspace') {
-        resetCalculator();
+        backspace();
         updateDisplay();
     }
 });
